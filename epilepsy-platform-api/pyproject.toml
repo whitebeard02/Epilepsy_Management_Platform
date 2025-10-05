@@ -13,8 +13,8 @@ dependencies = [
     "uvicorn[standard] (>=0.37.0,<0.38.0)",
     "sqlalchemy (>=2.0.43,<3.0.0)",
     "python-dotenv (>=1.1.1,<2.0.0)",
-    "passlib[bcrypt] (>=1.7.4,<2.0.0)",
-    "python-jose (>=3.5.0,<4.0.0)"
+    "python-jose (>=3.5.0,<4.0.0)",
+    "passlib[argon2] (>=1.7.4,<2.0.0)",
 ]
 
 
@@ -23,3 +23,12 @@ requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
 [tool.poetry]
 packages = [{ include = "app" }]
+[dependency-groups]
+dev = [
+    "pytest (>=8.4.2,<9.0.0)",
+    "httpx (>=0.28.1,<0.29.0)"
+]
+[tool.pytest.ini_options]
+filterwarnings = [
+    "ignore::DeprecationWarning:passlib.handlers.argon2",
+]

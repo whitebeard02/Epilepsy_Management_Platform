@@ -1,17 +1,16 @@
 # app/schemas/clinician.py
-from pydantic import BaseModel, EmailStr
+
+from pydantic import BaseModel, EmailStr, Field, ConfigDict # <-- Import ConfigDict
 from datetime import datetime
 
-# Schema for creating a new clinician
 class ClinicianCreate(BaseModel):
     email: EmailStr
-    password: str
+    password: str = Field(..., min_length=8, max_length=72)
 
-# Schema for returning clinician data (without the password)
 class Clinician(BaseModel):
     id: int
     email: EmailStr
     created_at: datetime
 
-    class Config:
-        from_attributes = True
+    # --- Use model_config instead of class Config ---
+    model_config = ConfigDict(from_attributes=True)
