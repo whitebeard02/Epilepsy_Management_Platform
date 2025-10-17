@@ -12,3 +12,5 @@ dist/
 # VS Code
 .vscode/
 .env
+# Pytest
+.pytest_cache/
